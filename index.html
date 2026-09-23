@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💣 Сапёр · Neon Edition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="game-wrapper">
+
+    <h1 class="title">💣 САПЁР</h1>
+
+    <div class="hud">
+      <div class="hud-item">
+        <span class="hud-label">МИНЫ</span>
+        <span class="hud-value" id="mine-count">10</span>
+      </div>
+      <button class="reset-btn" id="reset-btn">🙂</button>
+      <div class="hud-item">
+        <span class="hud-label">ВРЕМЯ</span>
+        <span class="hud-value" id="timer">000</span>
+      </div>
+    </div>
+
+    <div class="difficulty">
+      <button data-level="easy"   class="diff-btn active">Легко 9×9</button>
+      <button data-level="medium" class="diff-btn">Средне 16×16</button>
+      <button data-level="hard"   class="diff-btn">Сложно 16×30</button>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <p class="hint">
+      🖱 ЛКМ — открыть клетку &nbsp;·&nbsp; 🚩 ПКМ — поставить флаг
+    </p>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
