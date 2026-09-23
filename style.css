@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+:root {
+  --bg: #05070f;
+  --bg2: #0a0f1e;
+  --neon: #00d4ff;
+  --neon2: #0090ff;
+  --neon-soft: rgba(0, 212, 255, 0.35);
+  --danger: #ff2d6f;
+  --text: #cfe9ff;
+  --cell-closed: #101a33;
+  --cell-open: #0a1122;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 0%, #0d1b3d 0%, var(--bg) 60%);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--text);
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.game-wrapper {
+  text-align: center;
+  padding: 28px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #080d1c, #0d1630);
+  box-shadow:
+    0 0 20px var(--neon-soft),
+    0 0 60px rgba(0, 144, 255, 0.2),
+    inset 0 0 30px rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+}
+
+/* ---------- Заголовок ---------- */
+.title {
+  font-size: 32px;
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+  color: var(--neon);
+  text-shadow:
+    0 0 6px var(--neon),
+    0 0 18px var(--neon),
+    0 0 40px var(--neon2);
+  font-weight: 800;
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--cell-open);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  box-shadow: inset 0 0 12px rgba(0, 212, 255, 0.1);
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+
+.hud-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #5a7ba6;
+}
+
+.hud-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--neon);
+  text-shadow: 0 0 8px var(--neon);
+  font-family: 'Courier New', monospace;
+}
+
+.reset-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--neon);
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 0 12px var(--neon-soft);
+}
+
+.reset-btn:hover {
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 20px var(--neon);
+  transform: scale(1.08);
+}
+
+/* ---------- Кнопки сложности ---------- */
+.difficulty {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.diff-btn {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.diff-btn:hover {
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 10px var(--neon-soft);
+}
+
+.diff-btn.active {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--neon);
+  border-color: var(--neon);
+  box-shadow: 0 0 14px var(--neon-soft);
+}
+
+/* ---------- Игровое поле ---------- */
+.board {
+  display: grid;
+  gap: 3px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.cell {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  border-radius: 4px;
+  background: var(--cell-closed);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  cursor: pointer;
+  transition: 0.15s;
+  color: transparent;
+}
+
+.cell:hover:not(.open) {
+  background: #16233f;
+  box-shadow: 0 0 8px var(--neon-soft);
+  transform: scale(1.05);
+}
+
+/* Открытая клетка */
+.cell.open {
+  background: var(--cell-open);
+  border-color: rgba(0, 212, 255, 0.08);
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Флаг */
+.cell.flag {
+  color: var(--neon);
+  text-shadow: 0 0 8px var(--neon);
+}
+
+/* Мина */
+.cell.mine {
+  background: rgba(255, 45, 111, 0.15);
+  border-color: var(--danger);
+  color: var(--danger);
+  text-shadow: 0 0 10px var(--danger);
+  box-shadow: 0 0 14px rgba(255, 45, 111, 0.6);
+}
+
+/* Взорвавшаяся мина */
+.cell.exploded {
+  background: var(--danger);
+  color: #fff;
+  box-shadow: 0 0 20px var(--danger);
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Цвета цифр */
+.cell.open[data-n="1"] { color: #00d4ff; text-shadow: 0 0 6px #00d4ff; }
+.cell.open[data-n="2"] { color: #4dff88; text-shadow: 0 0 6px #4dff88; }
+.cell.open[data-n="3"] { color: #ffd93d; text-shadow: 0 0 6px #ffd93d; }
+.cell.open[data-n="4"] { color: #ff9a3c; text-shadow: 0 0 6px #ff9a3c; }
+.cell.open[data-n="5"] { color: #ff5c5c; text-shadow: 0 0 6px #ff5c5c; }
+.cell.open[data-n="6"] { color: #ff2d6f; text-shadow: 0 0 6px #ff2d6f; }
+.cell.open[data-n="7"] { color: #c04dff; text-shadow: 0 0 6px #c04dff; }
+.cell.open[data-n="8"] { color: #ffffff; text-shadow: 0 0 6px #ffffff; }
+
+/* ---------- Подсказка ---------- */
+.hint {
+  margin-top: 18px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #5a7ba6;
+}
+
+/* ---------- Мобильная адаптация ---------- */
+@media (max-width: 640px) {
+  .cell { width: 24px; height: 24px; font-size: 13px; }
+  .title { font-size: 24px; letter-spacing: 4px; }
+  .game-wrapper { padding: 18px; }
+}
